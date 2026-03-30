@@ -1,0 +1,43 @@
+{
+  "name": "inventory-management-system",
+  "version": "1.0.0",
+  "description": "Production-oriented inventory management system with dashboard, purchasing, sales, alerts, and desktop shell.",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node src/server.js",
+    "seed": "node scripts/seed.js",
+    "desktop": "electron electron/main.cjs",
+    "check": "node --check src/server.js && node --check src/app.js && node --check client/app.js && node --check scripts/seed.js"
+  },
+  "keywords": [
+    "inventory",
+    "warehouse",
+    "pharmacy",
+    "retail",
+    "electron",
+    "express",
+    "mongodb"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "bwip-js": "^4.5.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "exceljs": "^4.4.0",
+    "express": "^4.19.2",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.6.1",
+    "mongodb-memory-server": "^10.1.4",
+    "morgan": "^1.10.0",
+    "multer": "^2.0.2",
+    "pdfkit": "^0.15.0",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "electron": "^33.2.0"
+  }
+}

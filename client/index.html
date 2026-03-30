@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inventory Management System</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="auth-shell" id="auth-view">
+      <section class="brand-panel">
+        <p class="eyebrow">Warehouse • Pharmacy • Retail</p>
+        <h1>Inventory Management System</h1>
+        <p class="hero-copy">
+          Track stock, automate purchasing, manage transfers, monitor expiries, and export actionable reports from one workspace.
+        </p>
+        <div class="feature-grid">
+          <article>
+            <h3>Role-ready security</h3>
+            <p>Admin, Manager, and Staff permissions with JWT authentication.</p>
+          </article>
+          <article>
+            <h3>Operational visibility</h3>
+            <p>Dashboards, alerts, approvals, movement history, and demand forecasting.</p>
+          </article>
+          <article>
+            <h3>Desktop-capable</h3>
+            <p>Run in the browser or launch the Electron shell for a desktop workflow.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="auth-card card">
+        <div class="auth-tabs">
+          <button class="tab-button active" data-auth-tab="login">Login</button>
+          <button class="tab-button" data-auth-tab="bootstrap">First Setup</button>
+        </div>
+
+        <form id="login-form" class="auth-form">
+          <h2>Sign in</h2>
+          <label>
+            Email
+            <input type="email" name="email" placeholder="admin@example.com" required />
+          </label>
+          <label>
+            Password
+            <input type="password" name="password" placeholder="Enter password" required />
+          </label>
+          <button type="submit" class="primary-button">Login</button>
+        </form>
+
+        <form id="bootstrap-form" class="auth-form hidden">
+          <h2>Create first admin</h2>
+          <label>
+            Full name
+            <input type="text" name="name" placeholder="System Admin" required />
+          </label>
+          <label>
+            Email
+            <input type="email" name="email" placeholder="admin@example.com" required />
+          </label>
+          <label>
+            Password
+            <input type="password" name="password" placeholder="At least 6 characters" required />
+          </label>
+          <button type="submit" class="primary-button">Bootstrap Admin</button>
+        </form>
+
+        <div class="demo-hint">
+          <p>After seeding, sample users are:</p>
+          <p><strong>Admin:</strong> admin@inventory.local / Password123!</p>
+          <p><strong>Manager:</strong> manager@inventory.local / Password123!</p>
+          <p><strong>Staff:</strong> staff@inventory.local / Password123!</p>
+        </div>
+      </section>
+    </div>
+
+    <div class="app-shell hidden" id="app-view">
+      <aside class="sidebar">
+        <div>
+          <div class="sidebar-brand">
+            <span class="badge-dot"></span>
+            <div>
+              <p class="eyebrow">Operations</p>
+              <h2>Stock Control</h2>
+            </div>
+          </div>
+
+          <nav class="sidebar-nav" id="sidebar-nav">
+            <button data-view="dashboard" class="nav-link active">Dashboard</button>
+            <button data-view="products" class="nav-link">Products</button>
+            <button data-view="purchases" class="nav-link">Purchases</button>
+            <button data-view="issues" class="nav-link">Sales & Issue</button>
+            <button data-view="suppliers" class="nav-link">Suppliers</button>
+            <button data-view="reports" class="nav-link">Reports</button>
+            <button data-view="alerts" class="nav-link">Alerts</button>
+            <button data-view="logs" class="nav-link">Audit Logs</button>
+            <button data-view="settings" class="nav-link">Settings</button>
+          </nav>
+        </div>
+
+        <div class="sidebar-footer card compact">
+          <div>
+            <p id="user-name">-</p>
+            <p class="muted" id="user-role">-</p>
+          </div>
+          <button id="logout-button" class="ghost-button small">Logout</button>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Inventory Workspace</p>
+            <h1 id="view-title">Dashboard</h1>
+            <p id="view-subtitle" class="muted">Daily control center for stock, alerts, and activity.</p>
+          </div>
+          <div class="topbar-actions">
+            <button id="refresh-button" class="ghost-button">Refresh</button>
+          </div>
+        </header>
+
+        <section id="toast-root" class="toast-root"></section>
+        <section id="view-root" class="view-root"></section>
+      </main>
+    </div>
+
+    <dialog id="modal" class="modal"></dialog>
+  </body>
+</html>
