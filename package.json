@@ -2,13 +2,14 @@
   "name": "inventory-management-system",
   "version": "1.0.0",
   "description": "Production-oriented inventory management system with dashboard, purchasing, sales, alerts, and desktop shell.",
-  "main": "src/server.js",
+  "main": "electron/main.cjs",
   "scripts": {
     "start": "node src/server.js",
     "dev": "node src/server.js",
     "seed": "node scripts/seed.js",
-    "desktop": "electron electron/main.cjs",
-    "check": "node --check src/server.js && node --check src/app.js && node --check client/app.js && node --check scripts/seed.js"
+    "desktop": "electron . --no-sandbox --disable-gpu-sandbox",
+    "build:exe": "electron-builder --win portable",
+    "check": "node --check src/server.js && node --check src/app.js && node --check client/app.js && node --check scripts/seed.js && node --check electron/main.cjs"
   },
   "keywords": [
     "inventory",
@@ -30,14 +31,42 @@
     "express": "^4.19.2",
     "helmet": "^7.1.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.6.1",
     "mongodb-memory-server": "^10.1.4",
+    "mongoose": "^8.6.1",
     "morgan": "^1.10.0",
     "multer": "^2.0.2",
     "pdfkit": "^0.15.0",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
-    "electron": "^33.2.0"
+    "electron": "^41.1.0",
+    "electron-builder": "^26.8.1"
+  },
+  "build": {
+    "appId": "com.techsangam.inventorymanagement",
+    "productName": "Inventory Management System",
+    "asar": false,
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "client/**/*",
+      "electron/**/*",
+      "src/**/*",
+      "package.json",
+      "package-lock.json",
+      ".env.example"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "Inventory-Management-System-${version}.exe"
+    }
   }
 }

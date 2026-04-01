@@ -1,12 +1,17 @@
+const os = require("os");
 const fs = require("fs/promises");
 const path = require("path");
 const mongoose = require("mongoose");
 
 let memoryServer = null;
 
+function getEmbeddedDbPath() {
+  return path.join(os.homedir(), ".inventory-management-system", "mongo-data");
+}
+
 async function startEmbeddedMongo() {
   const { MongoMemoryServer } = require("mongodb-memory-server");
-  const dbPath = path.join(process.cwd(), ".mongodb-data");
+  const dbPath = process.env.EMBEDDED_MONGO_DB_PATH || getEmbeddedDbPath();
 
   if (memoryServer) {
     return memoryServer.getUri();
@@ -57,4 +62,12 @@ async function connectDatabase() {
   }
 }
 
-module.exports = { connectDatabase };
+async function disconnectDatabase() {
+  await mongoose.disconnect();
+  if (memoryServer) {
+    await memoryServer.stop();
+    memoryServer = null;
+  }
+}
+
+module.exports = { connectDatabase, disconnectDatabase };
